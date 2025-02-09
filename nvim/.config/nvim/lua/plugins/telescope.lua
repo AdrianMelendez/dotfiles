@@ -7,10 +7,27 @@ return {
     tag = "0.1.5",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("telescope").setup({
+        require("telescope").setup({
+            defaults = {
+                vimgrep_arguments = {
+                    "rg",
+                    "--color=never",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
+                    "--smart-case",
+                },
+            layout_strategy = "horizontal",
+            layout_config = {
+                preview_width = 0.5,
+                preview_cutoff = 0,
+            },
+            preview = true,
+        },
         extensions = {
           ["ui-select"] = {
-            require("telescope.themes").get_dropdown({}),
+            require("telescope.themes").get_dropdown({ previewer = true }),
           },
         },
       })
